@@ -34,7 +34,7 @@ export default function DashboardPage() {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-green-500">{error}</p>;
+  if (error) return <p className="text-green-500">Welcome! Fimperial</p>;
 
   return (
     <div className="p-4">

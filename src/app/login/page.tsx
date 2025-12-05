@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/auth";
+
+// Hardcoded test user
+const TEST_USER = {
+  email: "fimperial",
+  password: "fimperial",
+  username: "fimperial",
+  token: "fimperial", // dummy JWT
+};
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,12 +18,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
 
   async function handleLogin() {
-    try {
-      const result = await login(email, password);
-      localStorage.setItem("token", result.token); // store JWT
+    // Check credentials against hardcoded user
+    if (email === TEST_USER.email && password === TEST_USER.password) {
+      localStorage.setItem("token", TEST_USER.token);
+      localStorage.setItem("username", TEST_USER.username);
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message);
+    } else {
+      setError("Invalid credentials");
     }
   }
 
